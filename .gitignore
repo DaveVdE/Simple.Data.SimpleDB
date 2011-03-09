@@ -5,3 +5,6 @@ Release
 *.suo
 *.user
 _Resharper.*
+TestResults
+*.vsmdi
+Simple.Data.SimpleDB.TryOuts
