@@ -50,9 +50,29 @@ namespace Simple.Data.SimpleDB
 
         private static Dictionary<string, object> ConvertToDictionary(Item item)
         {
-            var dictionary = item.Attribute.ToDictionary(
-                    attribute => attribute.Name,
-                    attribute => (object)attribute.Value);
+            var dictionary = new Dictionary<string, object>();
+
+            foreach (var attribute in item.Attribute)
+            {
+                object value;
+
+                if (dictionary.TryGetValue(attribute.Name, out value))
+                {
+                    var values = value as List<string>;
+
+                    if (values == null)
+                    {
+                        values = new List<string> {value.ToString()};
+                        dictionary[attribute.Name] = values;
+                    }
+
+                    values.Add(attribute.Value);
+                }
+                else
+                {
+                    dictionary.Add(attribute.Name, attribute.Value);
+                }
+            }
 
             dictionary["Name"] = item.Name;
 

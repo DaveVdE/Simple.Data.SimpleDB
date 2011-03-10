@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Amazon.SimpleDB.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Simple.Data.SimpleDB.Tests.Fakes;
 
@@ -15,7 +14,7 @@ namespace Simple.Data.SimpleDB.Tests
             public string Color { get; set; }
         }
 
-        private FakeAmazonSimpleDB CreateFake()
+        private static FakeAmazonSimpleDB CreateFake()
         {
             return new FakeAmazonSimpleDB
             {
